@@ -5,17 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget Variance Waterfall Chart</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-        }
-        .bar {
-            transition: all 0.3s ease;
-        }
-        .bar:hover {
-            opacity: 0.8;
         }
     </style>
 </head>
@@ -64,101 +59,8 @@
             <!-- Waterfall Chart -->
             <div class="mb-8">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Budget to Actuals Bridge</h2>
-                <div class="relative bg-gray-50 p-6 rounded-lg border border-gray-200">
-                    <!-- Chart Container -->
-                    <div class="flex items-end justify-between h-96 gap-2">
-                        <!-- FY24 Budget -->
-                        <div class="flex-1 flex flex-col items-center">
-                            <div class="w-full bg-blue-600 rounded-t" style="height: 100%; position: relative;">
-                                <div class="absolute -top-8 left-0 right-0 text-center">
-                                    <p class="text-xs font-semibold text-gray-700">$2.5M</p>
-                                </div>
-                            </div>
-                            <p class="text-xs text-center mt-2 font-medium">FY24<br>Budget</p>
-                        </div>
-
-                        <!-- Personnel -->
-                        <div class="flex-1 flex flex-col items-center">
-                            <div class="w-full" style="height: 100%; position: relative; display: flex; flex-direction: column; justify-content: flex-end;">
-                                <div class="w-full bg-red-500 rounded-t" style="height: 7.2%;">
-                                    <div class="absolute -top-8 left-0 right-0 text-center">
-                                        <p class="text-xs font-semibold text-gray-700">-$180K</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-xs text-center mt-2 font-medium">Personnel</p>
-                        </div>
-
-                        <!-- Technology -->
-                        <div class="flex-1 flex flex-col items-center">
-                            <div class="w-full" style="height: 100%; position: relative; display: flex; flex-direction: column; justify-content: flex-end;">
-                                <div class="w-full bg-green-500 rounded-t" style="height: 3.8%;">
-                                    <div class="absolute -top-8 left-0 right-0 text-center">
-                                        <p class="text-xs font-semibold text-gray-700">+$95K</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-xs text-center mt-2 font-medium">Technology</p>
-                        </div>
-
-                        <!-- Contracts -->
-                        <div class="flex-1 flex flex-col items-center">
-                            <div class="w-full" style="height: 100%; position: relative; display: flex; flex-direction: column; justify-content: flex-end;">
-                                <div class="w-full bg-red-500 rounded-t" style="height: 8.8%;">
-                                    <div class="absolute -top-8 left-0 right-0 text-center">
-                                        <p class="text-xs font-semibold text-gray-700">-$220K</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-xs text-center mt-2 font-medium">Contracts</p>
-                        </div>
-
-                        <!-- Travel -->
-                        <div class="flex-1 flex flex-col items-center">
-                            <div class="w-full" style="height: 100%; position: relative; display: flex; flex-direction: column; justify-content: flex-end;">
-                                <div class="w-full bg-red-500 rounded-t" style="height: 1.8%;">
-                                    <div class="absolute -top-8 left-0 right-0 text-center">
-                                        <p class="text-xs font-semibold text-gray-700">-$45K</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-xs text-center mt-2 font-medium">Travel</p>
-                        </div>
-
-                        <!-- Training -->
-                        <div class="flex-1 flex flex-col items-center">
-                            <div class="w-full" style="height: 100%; position: relative; display: flex; flex-direction: column; justify-content: flex-end;">
-                                <div class="w-full bg-green-500 rounded-t" style="height: 1.4%;">
-                                    <div class="absolute -top-8 left-0 right-0 text-center">
-                                        <p class="text-xs font-semibold text-gray-700">+$35K</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-xs text-center mt-2 font-medium">Training</p>
-                        </div>
-
-                        <!-- Operations -->
-                        <div class="flex-1 flex flex-col items-center">
-                            <div class="w-full" style="height: 100%; position: relative; display: flex; flex-direction: column; justify-content: flex-end;">
-                                <div class="w-full bg-red-500 rounded-t" style="height: 5%;">
-                                    <div class="absolute -top-8 left-0 right-0 text-center">
-                                        <p class="text-xs font-semibold text-gray-700">-$125K</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-xs text-center mt-2 font-medium">Operations</p>
-                        </div>
-
-                        <!-- FY24 Actuals -->
-                        <div class="flex-1 flex flex-col items-center">
-                            <div class="w-full bg-green-600 rounded-t" style="height: 82.4%; position: relative;">
-                                <div class="absolute -top-8 left-0 right-0 text-center">
-                                    <p class="text-xs font-semibold text-gray-700">$2.06M</p>
-                                </div>
-                            </div>
-                            <p class="text-xs text-center mt-2 font-medium">FY24<br>Actuals</p>
-                        </div>
-                    </div>
+                <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <canvas id="waterfallChart" width="800" height="400"></canvas>
                 </div>
             </div>
 
@@ -280,6 +182,89 @@
                 button.textContent = 'Show Details';
             }
         }
+
+        // Create waterfall chart
+        const ctx = document.getElementById('waterfallChart').getContext('2d');
+        
+        const data = {
+            labels: ['FY24 Budget', 'Personnel', 'Technology', 'Contracts', 'Travel', 'Training', 'Operations', 'FY24 Actuals'],
+            datasets: [{
+                label: 'Amount',
+                data: [
+                    2500000,  // Starting budget
+                    -180000,  // Personnel variance
+                    95000,    // Technology variance
+                    -220000,  // Contracts variance
+                    -45000,   // Travel variance
+                    35000,    // Training variance
+                    -125000,  // Operations variance
+                    2060000   // Final actuals
+                ],
+                backgroundColor: [
+                    'rgba(37, 99, 235, 0.8)',    // Blue for start
+                    'rgba(239, 68, 68, 0.8)',    // Red for decrease
+                    'rgba(16, 185, 129, 0.8)',   // Green for increase
+                    'rgba(239, 68, 68, 0.8)',    // Red for decrease
+                    'rgba(239, 68, 68, 0.8)',    // Red for decrease
+                    'rgba(16, 185, 129, 0.8)',   // Green for increase
+                    'rgba(239, 68, 68, 0.8)',    // Red for decrease
+                    'rgba(5, 150, 105, 0.8)'     // Dark green for end
+                ],
+                borderColor: [
+                    'rgb(37, 99, 235)',
+                    'rgb(239, 68, 68)',
+                    'rgb(16, 185, 129)',
+                    'rgb(239, 68, 68)',
+                    'rgb(239, 68, 68)',
+                    'rgb(16, 185, 129)',
+                    'rgb(239, 68, 68)',
+                    'rgb(5, 150, 105)'
+                ],
+                borderWidth: 2
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let value = context.parsed.y;
+                                return '$' + value.toLocaleString('en-US', {maximumFractionDigits: 0});
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + (value / 1000000).toFixed(1) + 'M';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        };
+
+        new Chart(ctx, config);
     </script>
 </body>
 </html>
