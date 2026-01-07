@@ -13,34 +13,33 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-            background: linear-gradient(to bottom right, #f8fafc, #e2e8f0);
-            color: #333;
-        }
-        
-        .dashboard-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             min-height: 100vh;
             padding: 2rem;
         }
         
-        .header {
-            background: #1f2937;
-            color: white;
-            padding: 1.5rem 2rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            padding: 2rem;
         }
         
-        .header-top {
+        .header {
+            margin-bottom: 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 1rem;
         }
         
         .header h1 {
-            font-size: 2rem;
-            font-weight: 600;
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #111827;
         }
         
         .header-info {
@@ -48,71 +47,129 @@
         }
         
         .header-info p {
-            font-size: 0.85rem;
-            color: #d1d5db;
+            font-size: 0.875rem;
+            color: #6b7280;
         }
         
-        .header-subtitle {
-            color: #9ca3af;
+        .subtitle {
+            color: #6b7280;
             font-size: 1rem;
+            margin-top: 0.25rem;
         }
         
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
+            gap: 1rem;
             margin-bottom: 2rem;
         }
         
         .metric-card {
-            background: white;
             padding: 1.5rem;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border-left: 4px solid transparent;
+            border: 1px solid #e5e7eb;
         }
         
         .metric-card.blue {
-            border-left-color: #2563eb;
+            background: #eff6ff;
+            border-color: #bfdbfe;
         }
         
         .metric-card.green {
-            border-left-color: #059669;
+            background: #f0fdf4;
+            border-color: #bbf7d0;
         }
         
         .metric-card.red {
-            border-left-color: #ef4444;
+            background: #fef2f2;
+            border-color: #fecaca;
         }
         
         .metric-card.purple {
-            border-left-color: #7c3aed;
+            background: #faf5ff;
+            border-color: #e9d5ff;
         }
         
         .metric-label {
-            color: #6b7280;
-            font-size: 0.85rem;
+            font-size: 0.875rem;
+            font-weight: 500;
             margin-bottom: 0.5rem;
+        }
+        
+        .metric-card.blue .metric-label {
+            color: #1e40af;
+        }
+        
+        .metric-card.green .metric-label {
+            color: #166534;
+        }
+        
+        .metric-card.red .metric-label {
+            color: #991b1b;
+        }
+        
+        .metric-card.purple .metric-label {
+            color: #6b21a8;
         }
         
         .metric-value {
             font-size: 2rem;
-            font-weight: bold;
-            color: #1f2937;
+            font-weight: 700;
         }
         
-        .chart-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        .metric-card.blue .metric-value {
+            color: #1e3a8a;
+        }
+        
+        .metric-card.green .metric-value {
+            color: #14532d;
+        }
+        
+        .metric-card.red .metric-value {
+            color: #7f1d1d;
+        }
+        
+        .metric-card.purple .metric-value {
+            color: #581c87;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1rem;
+        }
+        
+        .toggle-button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .toggle-button:hover {
+            background: #2563eb;
+        }
+        
+        .chart-section {
             margin-bottom: 2rem;
         }
         
-        .chart-title {
+        .section-title {
             font-size: 1.25rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
             color: #374151;
+            margin-bottom: 1rem;
+        }
+        
+        .chart-wrapper {
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
         }
         
         .chart-container {
@@ -120,41 +177,16 @@
             height: 400px;
         }
         
-        .toggle-button {
-            background: #3b82f6;
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            margin-bottom: 1.5rem;
-            transition: background 0.3s;
-        }
-        
-        .toggle-button:hover {
-            background: #2563eb;
-        }
-        
-        .table-container {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        .table-section {
             margin-bottom: 2rem;
-        }
-        
-        .table-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            padding: 1.5rem;
-            color: #374151;
-            border-bottom: 2px solid #e5e7eb;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
         }
         
         thead {
@@ -162,40 +194,40 @@
         }
         
         th {
-            padding: 1rem;
+            padding: 0.75rem 1rem;
             text-align: left;
-            font-size: 0.85rem;
+            font-size: 0.875rem;
             font-weight: 600;
             color: #374151;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 2px solid #e5e7eb;
         }
         
-        th.text-right {
+        th.align-right {
             text-align: right;
         }
         
         td {
-            padding: 1rem;
-            font-size: 0.9rem;
-            color: #1f2937;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            color: #111827;
             border-bottom: 1px solid #f3f4f6;
         }
         
-        td.text-right {
+        td.align-right {
             text-align: right;
         }
         
-        tr:hover {
+        tbody tr:hover {
             background: #f9fafb;
         }
         
-        tr.summary-row {
+        .summary-row {
             background: #eff6ff;
             font-weight: 600;
         }
         
-        tr.summary-row:hover {
-            background: #dbeafe;
+        .summary-row:hover {
+            background: #dbeafe !important;
         }
         
         .text-green {
@@ -204,35 +236,49 @@
         }
         
         .text-red {
-            color: #ef4444;
+            color: #dc2626;
             font-weight: 600;
         }
         
-        .insights-card {
+        .insights-section {
             background: #f8fafc;
             padding: 1.5rem;
             border-radius: 8px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #cbd5e1;
         }
         
         .insights-title {
-            font-size: 1.1rem;
+            font-size: 1.125rem;
             font-weight: 600;
             color: #374151;
             margin-bottom: 1rem;
+        }
+        
+        .insight-list {
+            list-style: none;
         }
         
         .insight-item {
             display: flex;
             align-items: flex-start;
             margin-bottom: 0.75rem;
-            font-size: 0.9rem;
+            font-size: 0.875rem;
             color: #4b5563;
+            line-height: 1.5;
         }
         
         .insight-icon {
             margin-right: 0.5rem;
             font-size: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .insight-icon.down {
+            color: #dc2626;
+        }
+        
+        .insight-icon.up {
+            color: #059669;
         }
         
         .footer {
@@ -241,35 +287,35 @@
             border-top: 1px solid #e5e7eb;
             text-align: center;
             color: #6b7280;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
         }
     </style>
 </head>
 <body>
-    <div class="dashboard-container">
+    <div class="container">
         <div class="header">
-            <div class="header-top">
+            <div>
                 <h1>FY2024 Financial Performance Analysis</h1>
-                <div class="header-info">
-                    <p>Budget Variance Dashboard</p>
-                    <p>Prepared: December 2024</p>
-                </div>
+                <p class="subtitle">Nonprofit Program Operations</p>
             </div>
-            <p class="header-subtitle">Nonprofit Program Operations</p>
+            <div class="header-info">
+                <p>Budget Variance Dashboard</p>
+                <p>Prepared: December 2024</p>
+            </div>
         </div>
         
         <div class="metrics-grid">
             <div class="metric-card blue">
                 <p class="metric-label">Approved Budget</p>
-                <p class="metric-value">$2.5M</p>
+                <p class="metric-value">$2,500,000</p>
             </div>
             <div class="metric-card green">
                 <p class="metric-label">Total Actuals</p>
-                <p class="metric-value">$2.06M</p>
+                <p class="metric-value">$2,060,000</p>
             </div>
             <div class="metric-card red">
                 <p class="metric-label">Total Variance</p>
-                <p class="metric-value">-$440K</p>
+                <p class="metric-value">-$440,000</p>
             </div>
             <div class="metric-card purple">
                 <p class="metric-label">% Under Budget</p>
@@ -277,108 +323,114 @@
             </div>
         </div>
         
-        <div class="chart-card">
-            <h2 class="chart-title">Budget to Actuals Bridge</h2>
-            <div class="chart-container">
-                <canvas id="waterfallChart"></canvas>
+        <div class="button-container">
+            <button class="toggle-button" onclick="toggleTable()">
+                <span id="toggleText">Hide Details</span>
+            </button>
+        </div>
+        
+        <div class="chart-section">
+            <h2 class="section-title">Budget to Actuals Bridge</h2>
+            <div class="chart-wrapper">
+                <div class="chart-container">
+                    <canvas id="waterfallChart"></canvas>
+                </div>
             </div>
         </div>
         
-        <button class="toggle-button" onclick="toggleTable()">
-            <span id="toggleText">Hide Details</span>
-        </button>
-        
-        <div class="table-container" id="detailTable">
-            <div class="table-title">Detailed Variance Breakdown</div>
+        <div class="table-section" id="detailTable">
+            <h2 class="section-title">Detailed Variance Breakdown</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Category</th>
-                        <th class="text-right">Budget</th>
-                        <th class="text-right">Actual</th>
-                        <th class="text-right">Variance</th>
-                        <th class="text-right">% Var</th>
+                        <th class="align-right">Budget</th>
+                        <th class="align-right">Actual</th>
+                        <th class="align-right">Variance</th>
+                        <th class="align-right">% Var</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="summary-row">
                         <td>FY24 Approved Budget</td>
-                        <td class="text-right">$2,500,000</td>
-                        <td class="text-right">-</td>
-                        <td class="text-right">-</td>
-                        <td class="text-right">-</td>
+                        <td class="align-right">$2,500,000</td>
+                        <td class="align-right">-</td>
+                        <td class="align-right">-</td>
+                        <td class="align-right">-</td>
                     </tr>
                     <tr>
                         <td>Personnel Costs</td>
-                        <td class="text-right">$1,200,000</td>
-                        <td class="text-right">$1,020,000</td>
-                        <td class="text-right text-red">-$180,000</td>
-                        <td class="text-right text-red">-15.0%</td>
+                        <td class="align-right">$1,200,000</td>
+                        <td class="align-right">$1,020,000</td>
+                        <td class="align-right text-red">-$180,000</td>
+                        <td class="align-right text-red">-15.0%</td>
                     </tr>
                     <tr>
                         <td>Technology & Systems</td>
-                        <td class="text-right">$350,000</td>
-                        <td class="text-right">$445,000</td>
-                        <td class="text-right text-green">+$95,000</td>
-                        <td class="text-right text-green">+27.1%</td>
+                        <td class="align-right">$350,000</td>
+                        <td class="align-right">$445,000</td>
+                        <td class="align-right text-green">$95,000</td>
+                        <td class="align-right text-green">27.1%</td>
                     </tr>
                     <tr>
                         <td>External Contracts</td>
-                        <td class="text-right">$580,000</td>
-                        <td class="text-right">$360,000</td>
-                        <td class="text-right text-red">-$220,000</td>
-                        <td class="text-right text-red">-37.9%</td>
+                        <td class="align-right">$580,000</td>
+                        <td class="align-right">$360,000</td>
+                        <td class="align-right text-red">-$220,000</td>
+                        <td class="align-right text-red">-37.9%</td>
                     </tr>
                     <tr>
                         <td>Travel & Meetings</td>
-                        <td class="text-right">$120,000</td>
-                        <td class="text-right">$75,000</td>
-                        <td class="text-right text-red">-$45,000</td>
-                        <td class="text-right text-red">-37.5%</td>
+                        <td class="align-right">$120,000</td>
+                        <td class="align-right">$75,000</td>
+                        <td class="align-right text-red">-$45,000</td>
+                        <td class="align-right text-red">-37.5%</td>
                     </tr>
                     <tr>
                         <td>Training & Development</td>
-                        <td class="text-right">$85,000</td>
-                        <td class="text-right">$120,000</td>
-                        <td class="text-right text-green">+$35,000</td>
-                        <td class="text-right text-green">+41.2%</td>
+                        <td class="align-right">$85,000</td>
+                        <td class="align-right">$120,000</td>
+                        <td class="align-right text-green">$35,000</td>
+                        <td class="align-right text-green">41.2%</td>
                     </tr>
                     <tr>
                         <td>Operations & Admin</td>
-                        <td class="text-right">$165,000</td>
-                        <td class="text-right">$40,000</td>
-                        <td class="text-right text-red">-$125,000</td>
-                        <td class="text-right text-red">-75.8%</td>
+                        <td class="align-right">$165,000</td>
+                        <td class="align-right">$40,000</td>
+                        <td class="align-right text-red">-$125,000</td>
+                        <td class="align-right text-red">-75.8%</td>
                     </tr>
                     <tr class="summary-row">
                         <td>FY24 Total Actuals</td>
-                        <td class="text-right">-</td>
-                        <td class="text-right">$2,060,000</td>
-                        <td class="text-right text-red">-$440,000</td>
-                        <td class="text-right text-red">-17.6%</td>
+                        <td class="align-right">-</td>
+                        <td class="align-right">$2,060,000</td>
+                        <td class="align-right text-red">-$440,000</td>
+                        <td class="align-right text-red">-17.6%</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         
-        <div class="insights-card">
+        <div class="insights-section">
             <h3 class="insights-title">Key Insights</h3>
-            <div class="insight-item">
-                <span class="insight-icon">▼</span>
-                <span><strong>Personnel (15% under):</strong> Delayed hiring due to extended recruitment timelines</span>
-            </div>
-            <div class="insight-item">
-                <span class="insight-icon">▲</span>
-                <span><strong>Technology (27% over):</strong> Emergency system upgrades and cybersecurity investments</span>
-            </div>
-            <div class="insight-item">
-                <span class="insight-icon">▼</span>
-                <span><strong>Contracts (38% under):</strong> Renegotiated vendor agreements resulted in cost savings</span>
-            </div>
-            <div class="insight-item">
-                <span class="insight-icon">▼</span>
-                <span><strong>Operations (76% under):</strong> Consolidated office space and reduced administrative overhead</span>
-            </div>
+            <ul class="insight-list">
+                <li class="insight-item">
+                    <span class="insight-icon down">▼</span>
+                    <span><strong>Personnel (15% under):</strong> Delayed hiring due to extended recruitment timelines</span>
+                </li>
+                <li class="insight-item">
+                    <span class="insight-icon up">▲</span>
+                    <span><strong>Technology (27% over):</strong> Emergency system upgrades and cybersecurity investments</span>
+                </li>
+                <li class="insight-item">
+                    <span class="insight-icon down">▼</span>
+                    <span><strong>Contracts (38% under):</strong> Renegotiated vendor agreements resulted in cost savings</span>
+                </li>
+                <li class="insight-item">
+                    <span class="insight-icon down">▼</span>
+                    <span><strong>Operations (76% under):</strong> Consolidated office space and reduced administrative overhead</span>
+                </li>
+            </ul>
         </div>
         
         <div class="footer">
@@ -400,7 +452,6 @@
                 data: {
                     labels: ['FY24\nBudget', 'Personnel', 'Technology', 'Contracts', 'Travel', 'Training', 'Operations', 'FY24\nActuals'],
                     datasets: [{
-                        label: 'Amount',
                         data: [2500000, -180000, 95000, -220000, -45000, 35000, -125000, 2060000],
                         backgroundColor: [
                             '#2563eb',
@@ -412,17 +463,7 @@
                             '#ef4444',
                             '#059669'
                         ],
-                        borderColor: [
-                            '#1e40af',
-                            '#dc2626',
-                            '#059669',
-                            '#dc2626',
-                            '#dc2626',
-                            '#059669',
-                            '#dc2626',
-                            '#047857'
-                        ],
-                        borderWidth: 2
+                        borderWidth: 0
                     }]
                 },
                 options: {
@@ -436,8 +477,7 @@
                             callbacks: {
                                 label: function(context) {
                                     let value = context.parsed.y;
-                                    let formatted = '$' + Math.abs(value).toLocaleString('en-US', {maximumFractionDigits: 0});
-                                    return value >= 0 ? formatted : '-' + formatted;
+                                    return '$' + value.toLocaleString('en-US', {maximumFractionDigits: 0});
                                 }
                             }
                         }
