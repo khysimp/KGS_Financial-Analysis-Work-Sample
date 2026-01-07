@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Variance Waterfall Chart</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/recharts@2.5.0/dist/Recharts.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState } = React;
+        const { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell, ReferenceLine } = Recharts;
+
+        const BudgetVarianceWaterfall = () => {
+          const [showTable, setShowTable] = useState(true);
+
+          const data = [
+            { category: 'FY24 Budget', value: 2500000, cumulative: 2500000, type: 'start' },
+            { category: 'Personnel', value: -180000, cumulative: 2320000, type: 'decrease' },
+            { category: 'Technology', value: 95000, cumulative: 2415000, type: 'increase' },
+            { category: 'Contracts', value: -220000, cumulative: 2195000, type: 'decrease' },
+            { category: 'Travel', value: -45000, cumulative: 2150000, type: 'decrease' },
+            { category: 'Training', value: 35000, cumulative: 2185000, type: 'increase' },
+            { category: 'Operations', value: -125000, cumulative: 2060000, type: 'decrease' },
+            { category: 'FY24 Actuals', value: 2060000, cumulative: 2060000, type: 'end' }
+          ];
+
+          const tableData = [
+            { category: 'FY24 Approved Budget', budget: 2500000, actual: null, variance: null, pct: null },
+            { category: 'Personnel Costs', budget: 1200000, actual: 1020000, variance: -180000, pct: '-15.0%' },
+            { category: 'Technology & Systems', budget: 350000, actual: 445000, variance: 95000, pct: '27.1%' },
+            { category: 'External Contracts', budget: 580000, actual: 360000, variance: -220000, pct: '-37.9%' },
+            { category: 'Travel & Meetings', budget: 120000, actual: 75000, variance: -45000, pct: '-37.5%' },
+            { category: 'Training & Development', budget: 85000, actual: 120000, variance: 35000, pct: '41.2%' },
+            { category: 'Operations & Admin', budget: 165000, actual: 40000, variance: -125000, pct: '-75.8%' },
+            { category: 'FY24 Total Actuals', budget: null, actual: 2060000, variance: -440000, pct: '-17.6%' }
+          ];
+
+          const formatCurrency = (value) => {
+            if (value === null) return '-';
+            return new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            }).format(value);
+          };
+
+          const getColor = (type) => {
+            switch(type) {
+              case 'start': return '#2563eb';
+              case 'end': return '#059669';
+              case 'increase': return '#10b981';
+              case 'decrease': return '#ef4444';
+              default: return '#64748b';
+            }
+          };
+
+          const CustomTooltip = ({ active, payload }) => {
+            if (active && payload && payload.length) {
+              const data = payload[0].payload;
+              return (
+                <div className="bg-white p-3 border border-gray-300 rounded shadow-lg">
+                  <p className="font-semibold text-gray-900">{data.category}</p>
+                  <p className="text-sm text-gray-700">
+                    Amount: <span className="font-medium">{formatCurrency(Math.abs(data.value))}</span>
+                  </p>
+                  <p className="text-sm text-gray-700">
+                    Cumulative: <span className="font-medium">{formatCurrency(data.cumulative)}</span>
+                  </p>
+                </div>
+              );
+            }
+            return null;
+          };
+
+          return (
+            <div className="w-full min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-8">
+              <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-xl p-8">
+                <div className="mb-8">
+                  <div className="flex items-center justify-between mb-2">
+                    <h1 className="text-3xl font-bold text-gray-900">FY2024 Financial Performance Analysis</h1>
+                    <div className="text-right">
+                      <p className="text-sm text-gray-600">Budget Variance Dashboard</p>
+                      <p className="text-sm text-gray-600">Prepared: December 2024</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-600">Nonprofit Program Operations</p>
+                </div>
+
+                <div className="grid grid-cols-4 gap-4 mb-8">
+                  <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                    <p className="text-sm text-blue-800 font-medium">Approved Budget</p>
+                    <p className="text-2xl font-bold text-blue-900">{formatCurrency(2500000)}</p>
+                  </div>
+                  <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                    <p className="text-sm text-green-800 font-medium">Total Actuals</p>
+                    <p className="text-2xl font-bold text-green-900">{formatCurrency(2060000)}</p>
+                  </div>
+                  <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+                    <p className="text-sm text-red-800 font-medium">Total Variance</p>
+                    <p className="text-2xl font-bold text-red-900">{formatCurrency(-440000)}</p>
+                  </div>
+                  <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                    <p className="text-sm text-purple-800 font-medium">% Under Budget</p>
+                    <p className="text-2xl font-bold text-purple-900">17.6%</p>
+                  </div>
+                </div>
+
+                <div className="mb-4 flex justify-end">
+                  <button
+                    onClick={() => setShowTable(!showTable)}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    {showTable ? 'Hide Details' : 'Show Details'}
+                  </button>
+                </div>
+
+                <div className="mb-8">
+                  <h2 className="text-xl font-semibold text-gray-800 mb-4">Budget to Actuals Bridge</h2>
+                  <ResponsiveContainer width="100%" height={400}>
+                    <BarChart data={data} margin={{ top: 20, right: 30, left: 80, bottom: 60 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                      <XAxis 
+                        dataKey="category" 
+                        angle={-45} 
+                        textAnchor="end" 
+                        height={100}
+                        tick={{ fontSize: 12 }}
+                      />
+                      <YAxis 
+                        tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
+                        tick={{ fontSize: 12 }}
+                      />
+                      <Tooltip content={<CustomTooltip />} />
+                      <ReferenceLine y={0} stroke="#000" />
+                      <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+                        {data.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={getColor(entry.type)} />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+
+                {showTable && (
+                  <div className="mb-6">
+                    <h2 className="text-xl font-semibold text-gray-800 mb-4">Detailed Variance Breakdown</h2>
+                    <div className="overflow-x-auto border border-gray-200 rounded-lg">
+                      <table className="w-full">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Category</th>
+                            <th className="px-4 py-3 text-right text-sm font-semibold text-gray-700">Budget</th>
+                            <th className="px-4 py-3 text-right text-sm font-semibold text-gray-700">Actual</th>
+                            <th className="px-4 py-3 text-right text-sm font-semibold text-gray-700">Variance</th>
+                            <th className="px-4 py-3 text-right text-sm font-semibold text-gray-700">% Var</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-200">
+                          {tableData.map((row, idx) => (
+                            <tr 
+                              key={idx} 
+                              className={`${
+                                idx === 0 || idx === tableData.length - 1 
+                                  ? 'bg-blue-50 font-semibold' 
+                                  : 'hover:bg-gray-50'
+                              }`}
+                            >
+                              <td className="px-4 py-3 text-sm text-gray-900">{row.category}</td>
+                              <td className="px-4 py-3 text-sm text-gray-900 text-right">{formatCurrency(row.budget)}</td>
+                              <td className="px-4 py-3 text-sm text-gray-900 text-right">{formatCurrency(row.actual)}</td>
+                              <td className={`px-4 py-3 text-sm text-right font-medium ${
+                                row.variance === null ? 'text-gray-900' :
+                                row.variance < 0 ? 'text-red-600' : 'text-green-600'
+                              }`}>
+                                {formatCurrency(row.variance)}
+                              </td>
+                              <td className={`px-4 py-3 text-sm text-right ${
+                                row.pct === null ? 'text-gray-900' :
+                                row.variance < 0 ? 'text-red-600' : 'text-green-600'
+                              }`}>
+                                {row.pct || '-'}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+
+                <div className="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-3">Key Insights</h3>
+                  <ul className="space-y-2 text-sm text-gray-700">
+                    <li className="flex items-start">
+                      <span className="text-red-500 mr-2">▼</span>
+                      <span><strong>Personnel (15% under):</strong> Delayed hiring due to extended recruitment timelines</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-500 mr-2">▲</span>
+                      <span><strong>Technology (27% over):</strong> Emergency system upgrades and cybersecurity investments</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-red-500 mr-2">▼</span>
+                      <span><strong>Contracts (38% under):</strong> Renegotiated vendor agreements resulted in cost savings</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-red-500 mr-2">▼</span>
+                      <span><strong>Operations (76% under):</strong> Consolidated office space and reduced administrative overhead</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-gray-200 text-center text-xs text-gray-500">
+                  <p>Dashboard developed by Khyrah Simpson | KGS Consulting</p>
+                </div>
+              </div>
+            </div>
+          );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<BudgetVarianceWaterfall />);
+    </script>
+</body>
+</html>
